@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "user.h"
 using namespace std;
 
@@ -7,20 +8,21 @@ const int mapX = 5;
 const int mapY = 5;
 // 사용자 정의 함수
 bool checkXY(int user_x, int mapX, int user_y, int mapY);
-void displayMap(int map[][mapX], int user_x, int user_y);
-bool checkGoal(int map[][mapX], int user_x, int user_y);
-bool moving(string user_input, User &user, int map[][mapX], int &user_x, int &user_y);
-void checkState(int map[][mapX], User &user, int user_x, int user_y);
+void displayMap(vector<vector<int>> map, int user_x, int user_y);
+bool checkGoal(vector<vector<int>> map, int user_x, int user_y);
+bool moving(string user_input, User &user, vector<vector<int>> map, int &user_x, int &user_y);
+void checkState(vector<vector<int>> map, User &user, int user_x, int user_y);
 bool CheckUser(User user);
 // 메인  함수
 int main()
 {
 	// 0은 빈 공간, 1은 아이템, 2는 적, 3은 포션, 4는 목적지
-	int map[mapY][mapX] = {{0, 1, 2, 0, 4},
+	vector<vector<int>> map{{0, 1, 2, 0, 4},
 						   {1, 0, 0, 2, 0},
 						   {0, 0, 0, 0, 0},
 						   {0, 2, 3, 0, 0},
-						   {3, 0, 0, 0, 2}};
+						   {3, 0, 0, 0, 2}};;
+
 	// 유저의 위치를 저장할 변수
 	int user_x = 0; // 가로 번호
 	int user_y = 0; // 세로 번호
@@ -62,7 +64,7 @@ bool CheckUser(User user)
     return true;
 
 }
-void checkState(int map[][mapX], User &user, int user_x, int user_y)
+void checkState(vector<vector<int>> map, User &user, int user_x, int user_y)
 {	
 	string state = "";
 	int posState = map[user_y][user_x];
@@ -90,7 +92,7 @@ void checkState(int map[][mapX], User &user, int user_x, int user_y)
 }
 
 // 지도와 사용자 위치 출력하는 함수
-void displayMap(int map[][mapX], int user_x, int user_y)
+void displayMap(vector<vector<int>> map, int user_x, int user_y)
 {
 	for (int i = 0; i < mapY; i++)
 	{
@@ -140,7 +142,7 @@ bool checkXY(int user_x, int mapX, int user_y, int mapY)
 }
 
 // 유저의 위치가 목적지인지 체크하는 함수
-bool checkGoal(int map[][mapX], int user_x, int user_y)
+bool checkGoal(vector<vector<int>> map, int user_x, int user_y)
 {
 	// 목적지 도착하면
 	if (map[user_y][user_x] == 4)
@@ -151,7 +153,7 @@ bool checkGoal(int map[][mapX], int user_x, int user_y)
 }
 
 // 유저의 위치를 옮기는 함수
-bool moving(string user_input, User &user, int map[][mapX], int &user_x, int &user_y)
+bool moving(string user_input, User &user, vector<vector<int>> map, int &user_x, int &user_y)
 {
 	int index = 0;
 	int buf_x, buf_y; // 임시로 움질일 위치를 저장
