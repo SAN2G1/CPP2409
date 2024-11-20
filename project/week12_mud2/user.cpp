@@ -1,22 +1,30 @@
 #include "user.h"
 
-User::User(){
+User::User(char icon, int x, int y) : icon(icon), x_point(x), y_point(y) {
     hp = 20;
-    itemCnt = 0;
+    item_cnt = 0;
 }
-void User::DecreaseHP(int dec_hp){
+void User::DecreaseHp(int dec_hp){
     hp -= dec_hp;
 }
-void User::IncreaseHP(int inc_hp){
+void User::IncreaseHp(int inc_hp){
     hp += inc_hp;
 }
-int User::GetHP(){
+int User::GetHp(){
     return hp;
     }
 
-void User::incItemCnt(){
-    ++itemCnt;
+void User::IncItemCnt(){
+    ++item_cnt;
 }
-void User::decItemCnt(){
-    --itemCnt;
+void User::DecItemCnt(){
+    --item_cnt;
+}
+
+char User:: GetIcon(){
+    return icon;
+}
+
+void User:: DoAttak(){
+    std::cout << "공격합니다." << std::endl; 
 }
