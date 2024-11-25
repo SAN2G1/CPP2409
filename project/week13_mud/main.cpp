@@ -13,7 +13,7 @@ void DisplayMap(const vector<vector<int>> &map, User *player);
 bool CheckGoal(const vector<vector<int>> &map, User &player);
 bool Moving(string user_input, const vector<vector<int>> &map, User &player);
 void CheckState(const vector<vector<int>> &map, User &player);
-bool CheckUser(User &user);
+bool CheckUserHP(User &user);
 
 // 마법사 클래스 정의
 class Magician : public User
@@ -156,7 +156,7 @@ int main()
 
         DisplayMap(map, player);
         CheckState(map, *player);
-        if (!CheckUser(*player))
+        if (!CheckUserHP(*player))
         {
             cout << "체력이 0이 되어 종료합니다. " << player->GetIcon() << "은 실패했습니다! " << endl;
             break;
@@ -176,7 +176,7 @@ int main()
     return 0;
 }
 // 사용자 상태를 체크하는 함수
-bool CheckUser(User &user)
+bool CheckUserHP(User &user)
 {
     if (user.GetHp() <= 0)
         return false;
